@@ -1,0 +1,25 @@
+plugins {
+    id 'kotlin'
+    id 'java-library'
+    id 'maven'
+}
+
+repositories {
+    jcenter()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "com.pinterest.ktlint:ktlint-core:0.40.0"
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.assertj:assertj-core:3.10.0"
+    testImplementation "com.pinterest.ktlint:ktlint-core:0.40.0"
+    testImplementation "com.pinterest.ktlint:ktlint-test:0.32.0"
+}
