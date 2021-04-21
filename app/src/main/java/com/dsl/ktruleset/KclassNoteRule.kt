@@ -12,6 +12,7 @@ class KclassNoteRule : Rule("kclass-note-rules") {
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
     ) {
+        if (DisabledRulesCache.disabledRulesList.contains(id)) return
         if (node.elementType == KtStubElementTypes.CLASS) {
             var isActivity = false
             var isFragment = false
