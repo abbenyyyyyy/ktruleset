@@ -30,11 +30,17 @@ class KclassNoteRule : Rule("kclass-note-rules") {
             }
             if (isActivity || isFragment) {
                 if (node.firstChildNode.psi !is KDocElement) {
+//                    emit(
+//                        node.firstChildNode.startOffset,
+//                        if (isActivity) "请给Activity添加注释！" else "请给Fragment添加注释！",
+//                        false
+//                    )
                     emit(
-                        node.firstChildNode.startOffset,
-                        if (isActivity) "请给Activity添加注释！" else "请给Fragment添加注释！",
-                        false
+                            node.firstChildNode.startOffset,
+                            if (isActivity) "Please add a comment to the Activity！" else "Please add a comment to the Fragment！",
+                            false
                     )
+
                 }
             }
         }
