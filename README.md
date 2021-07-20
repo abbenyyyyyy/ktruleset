@@ -28,7 +28,7 @@ allprojects {
     ...
   }
 ```
-/usr/libexec/java_home -V
+
 <h3 align="center">构建</h3>
 
 ```git
