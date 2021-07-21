@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/abbenyyyyyy/ktruleset.svg)](https://jitpack.io/#abbenyyyyyy/ktruleset)
 <h3 align="center">简介</h3>
 自定义  [ktlint](https://github.com/pinterest/ktlint) 规则.  
 
@@ -6,7 +7,8 @@
 3. [KclassNoteRule](https://github.com/abbenyyyyyy/ktruleset/blob/master/app/src/main/java/com/dsl/ktruleset/KclassNoteRule.kt) -- 继承 ```BaseActivity``` 、 ```BaseFragment``` 的类必须要有注释.
 
 <h3 align="center">使用方法</h3>
-保证在项目正常使用 [ktlint](https://github.com/pinterest/ktlint);
+
+保证项目正常使用 [ktlint](https://github.com/pinterest/ktlint) ;
 
 在项目根目录下的 build.gradle 文件添加 JitPack 仓库
 ```gradle
@@ -24,9 +26,15 @@ allprojects {
   ...
   dependencies {
     ...
-    ktlint "com.github.abbenyyyyyy:ktruleset:1.0.3"
+    ktlint "com.github.abbenyyyyyy:ktruleset:1.0.4"
     ...
   }
+```
+
+在根目录的 ```.editorconfig ``` 添加 ```ben_ktlint_emit_language=zh_CN``` 可以用简体中文输出警告，默认是英语
+```
+...
+ben_ktlint_emit_language=zh_CN
 ```
 
 <h3 align="center">构建</h3>
@@ -39,4 +47,4 @@ git clone https://github.com/abbenyyyyyy/ktruleset.git
 ```bash
 ./gradlew build
 ```
-然后你就可以在项目根目录下的 app --> build --> libs 里看到构建的 app.jar.
+然后你就可以在项目根目录下的 app --> build --> libs 里看到构建的 app.jar .
