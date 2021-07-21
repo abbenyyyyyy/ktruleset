@@ -1,5 +1,7 @@
 package com.dsl.ktruleset
 
+import com.dsl.ktruleset.config.DisabledRulesCache
+import com.dsl.ktruleset.config.EmitLanguageCache
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
 import com.pinterest.ktlint.core.ast.children
@@ -11,9 +13,9 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 class AndroidLogRule : Rule("kclass-android-log-rules") {
     @Suppress("UNREACHABLE_CODE")
     override fun visit(
-            node: ASTNode,
-            autoCorrect: Boolean,
-            emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
+        node: ASTNode,
+        autoCorrect: Boolean,
+        emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
     ) {
         if (DisabledRulesCache.disabledRulesList.contains(id)) return
         var usedAndroidLog = false
@@ -25,11 +27,11 @@ class AndroidLogRule : Rule("kclass-android-log-rules") {
                             it.psi is PsiWhiteSpace && it.textLength > 1 // also collect empty lines, that are represented as "\n\n"
                 }
                 val sortedImports = imports
-                        .asSequence()
-                        .filter { it.psi !is PsiWhiteSpace } // sorter expects KtImportDirective, whitespaces are inserted afterwards
-                        .map { it.psi as KtImportDirective }
-                        .distinctBy { if (it.aliasName != null) it.text.substringBeforeLast(it.aliasName!!) else it.text } // distinguish by import path w/o aliases
-                        .map { it.node } // transform back to ASTNode in order to operate over its method (addChild)
+                    .asSequence()
+                    .filter { it.psi !is PsiWhiteSpace } // sorter expects KtImportDirective, whitespaces are inserted afterwards
+                    .map { it.psi as KtImportDirective }
+                    .distinctBy { if (it.aliasName != null) it.text.substringBeforeLast(it.aliasName!!) else it.text } // distinguish by import path w/o aliases
+                    .map { it.node } // transform back to ASTNode in order to operate over its method (addChild)
                 for (inportNode in sortedImports) {
                     if (inportNode.text == "import android.util.Log") {
                         usedAndroidLog = true
@@ -45,15 +47,10 @@ class AndroidLogRule : Rule("kclass-android-log-rules") {
                             if (childNode.elementType == ElementType.IDENTIFIER) {
                                 //第一个标识符，是类名
                                 if (childNode.text != "DebugLog") {
-//                                    emit(
-//                                        childNode.startOffset,
-//                                        "请使用DebugLog工具类！",
-//                                        false
-//                                    )
                                     emit(
-                                            childNode.startOffset,
-                                            "Please use the DebugLog class,do not use android.util.Log！",
-                                            false
+                                        childNode.startOffset,
+                                        if (EmitLanguageCache.emit_zh_CN) "请使用DebugLog工具类！" else "Please use the DebugLog class,do not use android.util.Log！",
+                                        false
                                     )
                                     break
                                 }

@@ -1,4 +1,4 @@
-package com.dsl.ktruleset
+package com.dsl.ktruleset.config
 
 import org.ec4j.core.PropertyTypeRegistry
 import org.ec4j.core.Resource
@@ -15,7 +15,12 @@ import kotlin.concurrent.read
 import kotlin.concurrent.write
 
 class ThreadSafeEditorConfigCache {
-    private val disabledRulesName = "disabled_rules"
+
+    companion object{
+        const val disabledRulesName = "disabled_rules"
+        const val emitLanguage = "ben_ktlint_emit_language"
+    }
+
     private val editorConfigFilePath = "../.editorconfig"
 
     private val readWriteLock = ReentrantReadWriteLock()
@@ -33,7 +38,7 @@ class ThreadSafeEditorConfigCache {
         }
     }
 
-    private fun getValutFromEditorConfig(key: String = disabledRulesName): String {
+    private fun getValutFromEditorConfig(key: String): String {
         if (checkEditorConfigFileExists()) {
             if (editorConfigCache == null) loaderEditorConfig()
             for (section in editorConfigCache!!.sections) {

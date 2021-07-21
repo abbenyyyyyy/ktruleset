@@ -1,5 +1,7 @@
 package com.dsl.ktruleset
 
+import com.dsl.ktruleset.config.DisabledRulesCache
+import com.dsl.ktruleset.config.EmitLanguageCache
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.children
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
@@ -30,17 +32,15 @@ class KclassNoteRule : Rule("kclass-note-rules") {
             }
             if (isActivity || isFragment) {
                 if (node.firstChildNode.psi !is KDocElement) {
-//                    emit(
-//                        node.firstChildNode.startOffset,
-//                        if (isActivity) "请给Activity添加注释！" else "请给Fragment添加注释！",
-//                        false
-//                    )
                     emit(
-                            node.firstChildNode.startOffset,
-                            if (isActivity) "Please add a comment to the Activity！" else "Please add a comment to the Fragment！",
-                            false
+                        node.firstChildNode.startOffset,
+                        if (isActivity) {
+                            if (EmitLanguageCache.emit_zh_CN) "请给Activity添加注释！" else "Please add a comment to the Activity！"
+                        } else {
+                            if (EmitLanguageCache.emit_zh_CN) "请给Fragment添加注释！" else "Please add a comment to the Fragment！"
+                        },
+                        false
                     )
-
                 }
             }
         }

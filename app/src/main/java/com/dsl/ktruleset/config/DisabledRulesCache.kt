@@ -1,4 +1,4 @@
-package com.dsl.ktruleset
+package com.dsl.ktruleset.config
 
 object DisabledRulesCache {
     val disabledRulesList = ThreadSafeEditorConfigCache().get().split(",")

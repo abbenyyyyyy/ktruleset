@@ -1,5 +1,7 @@
 package com.dsl.ktruleset
 
+import com.dsl.ktruleset.config.DisabledRulesCache
+import com.dsl.ktruleset.config.EmitLanguageCache
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
 import com.pinterest.ktlint.core.ast.children
@@ -11,9 +13,9 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
  */
 class ExtendBaseRule : Rule("kclass-extend-base-rules") {
     override fun visit(
-            node: ASTNode,
-            autoCorrect: Boolean,
-            emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
+        node: ASTNode,
+        autoCorrect: Boolean,
+        emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
     ) {
         if (DisabledRulesCache.disabledRulesList.contains(id)) return
         if (node.elementType == KtStubElementTypes.CLASS) {
@@ -28,7 +30,6 @@ class ExtendBaseRule : Rule("kclass-extend-base-rules") {
                         if (minChild.elementType == KtStubElementTypes.SUPER_TYPE_CALL_ENTRY) {
                             //继承的类
                             if (minChild.text == "Activity()") {
-                                //判断
                                 isExtendActivity = true
                             }
                             if (minChild.text == "Fragment()") {
@@ -47,41 +48,26 @@ class ExtendBaseRule : Rule("kclass-extend-base-rules") {
                     if (childNode.elementType == ElementType.IDENTIFIER) {
                         //第一个标识符，是类名
                         if (isExtendActivity && childNode.text != "BaseActivity") {
-//                            emit(
-//                                childNode.startOffset,
-//                                "Activity请继承BaseActivity！",
-//                                false
-//                            )
                             emit(
-                                    childNode.startOffset,
-                                    "Activity have to extend BaseActivity！",
-                                    false
+                                childNode.startOffset,
+                                if (EmitLanguageCache.emit_zh_CN) "Activity请继承BaseActivity！" else "Activity have to extend BaseActivity！",
+                                false
                             )
                             break
                         }
                         if (isExtendFragment && childNode.text != "BaseFragment") {
-//                            emit(
-//                                    childNode.startOffset,
-//                                    "Fragment请继承BaseFragment！",
-//                                    false
-//                            )
                             emit(
-                                    childNode.startOffset,
-                                    "Fragment have to extend BaseFragment！",
-                                    false
+                                childNode.startOffset,
+                                if (EmitLanguageCache.emit_zh_CN) "Fragment请继承BaseFragment！" else "Fragment have to extend BaseFragment！",
+                                false
                             )
                             break
                         }
                         if (isExtendDialog && childNode.text != "BaseDialogFragment") {
-//                            emit(
-//                                    childNode.startOffset,
-//                                    "Dialog请继承BaseDialogFragment！",
-//                                    false
-//                            )
                             emit(
-                                    childNode.startOffset,
-                                    "Dialog have to extend BaseDialogFragment！",
-                                    false
+                                childNode.startOffset,
+                                if (EmitLanguageCache.emit_zh_CN) "Dialog请继承BaseDialogFragment！" else "Dialog have to extend BaseDialogFragment！",
+                                false
                             )
                             break
                         }
