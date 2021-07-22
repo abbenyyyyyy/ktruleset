@@ -48,3 +48,9 @@ git clone https://github.com/abbenyyyyyy/ktruleset.git
 ./gradlew build
 ```
 然后你就可以在项目根目录下的 app --> build --> libs 里看到构建的 app.jar .
+
+<h3 align="center">License</h3>
+
+The MIT License(http://opensource.org/licenses/MIT)
+
+请自由地享受和参与开源
