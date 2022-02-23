@@ -27,15 +27,15 @@ allprojects {
   ...
   dependencies {
     ...
-    ktlint "com.github.abbenyyyyyy:ktruleset:1.0.4"
+    ktlint "com.github.abbenyyyyyy:ktruleset:1.0.5"
     ...
   }
 ```
 
-在根目录的 ```.editorconfig ``` 添加 ```ben_ktlint_emit_language=zh_CN``` 可以用简体中文输出警告，默认是英语
+在根目录的 ```.editorconfig ``` 添加 ```ktlint_language=zh_CN``` 可以用简体中文输出警告，默认与系统语言一致
 ```
 ...
-ben_ktlint_emit_language=zh_CN
+ktlint_language=zh_CN
 ```
 
 <h3 align="center">构建</h3>
@@ -52,6 +52,6 @@ git clone https://github.com/abbenyyyyyy/ktruleset.git
 
 <h3 align="center">License</h3>
 
-The MIT License(http://opensource.org/licenses/MIT)
-
-请自由地享受和参与开源
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
