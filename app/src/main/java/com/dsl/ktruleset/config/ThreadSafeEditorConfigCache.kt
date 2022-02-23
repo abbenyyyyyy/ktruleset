@@ -18,7 +18,7 @@ class ThreadSafeEditorConfigCache {
 
     companion object{
         const val disabledRulesName = "disabled_rules"
-        const val emitLanguage = "ben_ktlint_emit_language"
+        const val emitLanguage = "ktlint_language"
     }
 
     private val editorConfigFilePath = "../.editorconfig"

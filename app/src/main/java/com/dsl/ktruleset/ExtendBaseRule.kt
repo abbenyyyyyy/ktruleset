@@ -1,7 +1,7 @@
 package com.dsl.ktruleset
 
 import com.dsl.ktruleset.config.DisabledRulesCache
-import com.dsl.ktruleset.config.EmitLanguageCache
+import com.dsl.ktruleset.config.I18nSupport
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
 import com.pinterest.ktlint.core.ast.children
@@ -50,7 +50,7 @@ class ExtendBaseRule : Rule("kclass-extend-base-rules") {
                         if (isExtendActivity && childNode.text != "BaseActivity") {
                             emit(
                                 childNode.startOffset,
-                                if (EmitLanguageCache.emit_zh_CN) "Activity请继承BaseActivity！" else "Activity have to extend BaseActivity！",
+                                I18nSupport.i18nStr("ExtendBaseRuleActivityEmit"),
                                 false
                             )
                             break
@@ -58,7 +58,7 @@ class ExtendBaseRule : Rule("kclass-extend-base-rules") {
                         if (isExtendFragment && childNode.text != "BaseFragment") {
                             emit(
                                 childNode.startOffset,
-                                if (EmitLanguageCache.emit_zh_CN) "Fragment请继承BaseFragment！" else "Fragment have to extend BaseFragment！",
+                                I18nSupport.i18nStr("ExtendBaseRuleFragmentEmit"),
                                 false
                             )
                             break
@@ -66,7 +66,7 @@ class ExtendBaseRule : Rule("kclass-extend-base-rules") {
                         if (isExtendDialog && childNode.text != "BaseDialogFragment") {
                             emit(
                                 childNode.startOffset,
-                                if (EmitLanguageCache.emit_zh_CN) "Dialog请继承BaseDialogFragment！" else "Dialog have to extend BaseDialogFragment！",
+                                I18nSupport.i18nStr("ExtendBaseRuleDialogFragmentEmit"),
                                 false
                             )
                             break

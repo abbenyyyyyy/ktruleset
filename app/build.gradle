@@ -5,7 +5,7 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 compileKotlin {
@@ -17,9 +17,9 @@ compileTestKotlin {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly "com.pinterest.ktlint:ktlint-core:0.40.0"
+    compileOnly "com.pinterest.ktlint:ktlint-core:0.44.0"
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.assertj:assertj-core:3.10.0"
-    testImplementation "com.pinterest.ktlint:ktlint-core:0.40.0"
+    testImplementation "com.pinterest.ktlint:ktlint-core:0.44.0"
     testImplementation "com.pinterest.ktlint:ktlint-test:0.32.0"
 }

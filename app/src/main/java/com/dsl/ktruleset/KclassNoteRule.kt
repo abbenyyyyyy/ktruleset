@@ -1,7 +1,7 @@
 package com.dsl.ktruleset
 
 import com.dsl.ktruleset.config.DisabledRulesCache
-import com.dsl.ktruleset.config.EmitLanguageCache
+import com.dsl.ktruleset.config.I18nSupport
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.children
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
@@ -35,9 +35,9 @@ class KclassNoteRule : Rule("kclass-note-rules") {
                     emit(
                         node.firstChildNode.startOffset,
                         if (isActivity) {
-                            if (EmitLanguageCache.emit_zh_CN) "请给Activity添加注释！" else "Please add a comment to the Activity！"
+                            I18nSupport.i18nStr("KclassNoteRuleActivityEmit")
                         } else {
-                            if (EmitLanguageCache.emit_zh_CN) "请给Fragment添加注释！" else "Please add a comment to the Fragment！"
+                            I18nSupport.i18nStr("KclassNoteRuleFragmentEmit")
                         },
                         false
                     )

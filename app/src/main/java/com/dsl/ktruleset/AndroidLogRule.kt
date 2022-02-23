@@ -1,7 +1,7 @@
 package com.dsl.ktruleset
 
 import com.dsl.ktruleset.config.DisabledRulesCache
-import com.dsl.ktruleset.config.EmitLanguageCache
+import com.dsl.ktruleset.config.I18nSupport
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
 import com.pinterest.ktlint.core.ast.children
@@ -49,7 +49,7 @@ class AndroidLogRule : Rule("kclass-android-log-rules") {
                                 if (childNode.text != "DebugLog") {
                                     emit(
                                         childNode.startOffset,
-                                        if (EmitLanguageCache.emit_zh_CN) "请使用DebugLog工具类！" else "Please use the DebugLog class,do not use android.util.Log！",
+                                        I18nSupport.i18nStr("AndroidLogRuleEmit"),
                                         false
                                     )
                                     break
